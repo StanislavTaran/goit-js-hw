@@ -25,6 +25,7 @@ function addLogin(allLogins, login) {
       alert('Логин успешно добавлен!');
     } else {
       alert('Такой логин уже используется!');
+      return false;
     }
   } else {
     alert('Ошибка! Логин должен быть от 4 до 16 символов');
