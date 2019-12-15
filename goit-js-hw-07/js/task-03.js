@@ -17,3 +17,16 @@ const images = [
     alt: 'Group of Horses Running',
   },
 ];
+
+function createGallery(images) {
+  const gallery = [];
+  let itemOfGallery;
+  const imagesWrap = document.getElementById('gallery');
+  for (let image of images) {
+    itemOfGallery = `<li><img src="${image.url}" alt="${image.alt} "></li>`;
+    gallery.push(itemOfGallery);
+  }
+  imagesWrap.insertAdjacentHTML('beforeend', gallery.join(''));
+}
+
+createGallery(images);

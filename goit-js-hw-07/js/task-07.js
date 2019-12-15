@@ -7,6 +7,5 @@ range.addEventListener('input', changeFontSize);
 
 function changeFontSize(event) {
   let rangeValue = event.currentTarget.value;
-  console.log(rangeValue);
   text.setAttribute('style', `font-size: ${rangeValue}px`);
 }
