@@ -68,17 +68,13 @@ function flippingImagesByArrows(event) {
     idx += 1;
     nextImage += 1;
     prevImage += 1;
-
-    currentImageAdress = imagesAdress[idx];
-    refs.lightboxImage.setAttribute('src', currentImageAdress);
   } else if (isPressLeft && idx !== 0) {
     idx -= 1;
     nextImage -= 1;
     prevImage -= 1;
-
-    currentImageAdress = imagesAdress[idx];
-    refs.lightboxImage.setAttribute('src', currentImageAdress);
   }
+  currentImageAdress = imagesAdress[idx];
+  refs.lightboxImage.setAttribute('src', currentImageAdress);
 }
 
 const createGallery = function(galleryItems) {
