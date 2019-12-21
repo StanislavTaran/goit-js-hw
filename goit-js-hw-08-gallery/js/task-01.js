@@ -55,8 +55,6 @@ function handleKeyPress(event) {
 function flippingImagesByArrows(event) {
   let currentImageAdress = refs.lightboxImage.getAttribute('src');
   let idx = imagesAdress.indexOf(currentImageAdress);
-  let nextImage = imagesAdress[idx + 1];
-  let prevImage = imagesAdress[idx - 1];
 
   const isPressRight = event.code === 'ArrowRight';
   const isPressLeft = event.code === 'ArrowLeft';
@@ -66,12 +64,8 @@ function flippingImagesByArrows(event) {
     return;
   } else if (isPressRight && idx !== lastImage) {
     idx += 1;
-    nextImage += 1;
-    prevImage += 1;
   } else if (isPressLeft && idx !== 0) {
     idx -= 1;
-    nextImage -= 1;
-    prevImage -= 1;
   }
   currentImageAdress = imagesAdress[idx];
   refs.lightboxImage.setAttribute('src', currentImageAdress);
