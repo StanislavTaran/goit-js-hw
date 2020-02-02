@@ -16,6 +16,9 @@ class CountdownTimer {
   timerId = setInterval(() => {
     const currentTime = Date.now();
     this.deltaTime = this.targetDate - currentTime;
+    if (currentTime === this.targetDate) {
+      clearInterval(this.timerId);
+    }
     this.updateClockface(this.deltaTime);
   }, 1000);
 
