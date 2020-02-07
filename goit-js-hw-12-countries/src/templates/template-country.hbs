@@ -5,6 +5,13 @@
         <li class="country__item">Capital: {{capital}}</li>
         <li class="country__item">Population: {{population}}</li>
         <li class="country__item">Native Name: {{nativeName}}</li>
+        <ul>
+            <h3>Languages:</h3>
+            {{#each languages}}
+            <li>{{name}}</li>
+            {{/each}}
+        </ul>
         <li class="country__item"><img src={{flag}} alt={{name}} class="country__flag"></li>
+
     </ul>
 </div>
