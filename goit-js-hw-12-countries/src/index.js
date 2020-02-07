@@ -6,20 +6,19 @@ import searchListTemplate from './templates/searchListTemplate.hbs';
 import PNotify from '../node_modules/pnotify/dist/es/PNotify';
 
 const refs = {
-  input: document.getElementById('input-searh'),
+  input: document.getElementById('input-search'),
   output: document.getElementById('output-container'),
-  searchList: document.querySelector('.search-list-container'),
+  searchList: document.querySelector('#country-list'),
   debounce: require('lodash/debounce'),
 };
 
 refs.input.addEventListener('input', refs.debounce(handleSearhQuery, 500));
-refs.output.addEventListener('click', choiceCountry);
+refs.searchList.addEventListener('click', choiceCountry);
 
 function handleSearhQuery(e) {
   clearSearchResult();
   const country = e.target.value;
   if (!country) {
-    clearSearchResult();
     return;
   }
 
@@ -28,10 +27,12 @@ function handleSearhQuery(e) {
 
     if (data.length >= 2 && data.length <= 10) {
       data.map(country => {
-        insertMarkupCountry(country, searchListTemplate);
+        insertMarkupCountry(country, searchListTemplate, refs.searchList);
       });
     } else if (data.length === 1) {
-      data.map(country => insertMarkupCountry(country, countryTemplate));
+      data.map(country =>
+        insertMarkupCountry(country, countryTemplate, refs.output),
+      );
     } else {
       PNotify.error({
         text: 'Please specify your request.',
@@ -41,10 +42,10 @@ function handleSearhQuery(e) {
   });
 }
 
-function insertMarkupCountry(items, template) {
+function insertMarkupCountry(items, template, output) {
   const markup = template(items);
 
-  refs.output.insertAdjacentHTML('beforeend', markup);
+  output.insertAdjacentHTML('beforeend', markup);
 }
 
 function clearSearchResult() {
@@ -60,7 +61,7 @@ function choiceCountry(e) {
       bubbles: true,
       cancelable: true,
     });
-
+    refs.searchList.innerHTML = '<ul id="country-list"></ul>';
     refs.input.dispatchEvent(event);
   }
 }

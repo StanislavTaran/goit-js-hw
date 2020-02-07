@@ -8,11 +8,17 @@
   </head>
   <body>
     <header class="header-top">
-      <h1 class="header__logo">Search your Country</h1>
-      <form action="" method="get">
+      <div id="search-wrap">
+        <h1 class="header__logo">Search your Country</h1>
         <label for="inputsearhQuery">Country:</label>
-        <input type="text" name="searhQuery" id="input-searh" />
-      </form>
+        <input
+          type="text"
+          name="searhQuery"
+          id="input-search"
+          placeholder="For example: Ukraine"
+        />
+        <ul id="country-list"></ul>
+      </div>
     </header>
     <div id="output-container"></div>
   </body>
