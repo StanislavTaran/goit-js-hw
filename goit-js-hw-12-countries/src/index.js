@@ -33,6 +33,11 @@ function handleSearhQuery(e) {
       data.map(country =>
         insertMarkupCountry(country, countryTemplate, refs.output),
       );
+    } else if (data.status == '404') {
+      PNotify.error({
+        text: 'Country not found',
+        delay: 1000,
+      });
     } else {
       PNotify.error({
         text: 'Please specify your request.',
@@ -50,6 +55,7 @@ function insertMarkupCountry(items, template, output) {
 
 function clearSearchResult() {
   refs.output.innerHTML = '';
+  refs.searchList.innerHTML = '<ul id="country-list"></ul>';
 }
 
 function choiceCountry(e) {
@@ -61,7 +67,7 @@ function choiceCountry(e) {
       bubbles: true,
       cancelable: true,
     });
-    refs.searchList.innerHTML = '<ul id="country-list"></ul>';
+
     refs.input.dispatchEvent(event);
   }
 }
