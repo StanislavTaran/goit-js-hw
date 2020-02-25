@@ -12,6 +12,13 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  background: rgb(248, 248, 250);
+  background: radial-gradient(
+    circle,
+    rgba(248, 248, 250, 1) 0%,
+    rgba(210, 210, 231, 1) 53%,
+    rgba(202, 232, 232, 1) 100%
+  );
 }
 
 .intro {
@@ -22,7 +29,7 @@ body {
 }
 
 .search-form {
-  margin-left: 40px;
+  margin: 0 auto;
 }
 .gallery {
   display: flex;
@@ -32,8 +39,12 @@ body {
   align-items: center;
   padding: 0;
   list-style: none;
+  max-width: 1400px;
+  margin: 0 auto;
 }
-
+.scroll-crutch {
+  min-height: 100vh;
+}
 .stats {
   display: flex;
   flex-direction: row;
@@ -88,8 +99,7 @@ body {
   width: 320px;
 }
 
-.search-btn,
-#load-more-btn {
+.search-btn {
   display: inline-block;
   margin: 0;
   padding: 0;
@@ -97,29 +107,18 @@ body {
   width: 100px;
   font-family: Roboto;
   border-radius: 10px;
-  background-color: #16af16;
-  color: #fff;
+  background-color: #616464;
+  color: #000;
   border: 0;
   transition: background 0.3s;
 }
 
-.search-btn:hover,
-#load-more-btn:hover {
+.search-btn:hover {
   cursor: pointer;
-  background-color: #07d807;
-  box-shadow: 0 0 4px rgb(7, 206, 7);
+  background-color: #b3b6b6;
+  box-shadow: 0 0 5px rgb(24, 26, 24);
   background-position: center;
 }
-
-#load-more-btn {
-  text-align: center;
-  display: block;
-  margin: 0 auto;
-  padding: 20px 20px;
-  height: auto;
-  width: 280px;
-}
-
 /* Lightbox */
 .lightbox {
   position: fixed;
