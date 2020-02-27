@@ -21,13 +21,15 @@ const queryOptions = {
   baseUrl:
     'https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=',
   API_KEY: '12685146-fdd2799488131e47273c0b199',
+  numberOfPage: 1,
 };
 
 const fetchQuery = {
   getImages(SearchQuery, numberOfPage) {
     const query = `${SearchQuery}`;
     return fetch(
-      queryOptions.baseUrl +
+      queryOptions.proxyUrl +
+        queryOptions.baseUrl +
         query +
         '&' +
         'page=' +
@@ -118,7 +120,17 @@ const lightBox = {
 
 const infScr = new InfiniteScroll(refs.galleryParent, {
   path() {
-    return `${queryOptions.proxyUrl}${queryOptions.baseUrl}&per_page=12&key=${queryOptions.API_KEY}&q=${queryOptions.searchValue}&page=${this.pageIndex}`;
+    return (
+      queryOptions.proxyUrl +
+      queryOptions.baseUrl +
+      '&per_page=12' +
+      '&key=' +
+      queryOptions.API_KEY +
+      '&q=' +
+      queryOptions.searchValue +
+      '&page=' +
+      this.pageIndex
+    );
   },
   history: false,
   responseType: 'text',
@@ -130,8 +142,6 @@ infScr.on(`load`, response => {
 
   createMarkupResult(images);
 });
-
-// infScroll.on( 'request', function( path ) {...})
 
 refs.searchButton.addEventListener('click', handleSearchQuery);
 refs.galleryParent.addEventListener('click', lightBox.openLightbox);
