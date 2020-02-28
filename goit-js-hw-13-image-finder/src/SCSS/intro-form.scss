@@ -31,11 +31,11 @@
   font-weight: bolder;
   border: 0;
   transition: background 0.3s;
-}
 
-.search-btn:hover {
-  cursor: pointer;
-  background-color: rgb(110, 110, 110);
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(110, 110, 110);
+  }
 }
 
 @media (max-width: 470px) {

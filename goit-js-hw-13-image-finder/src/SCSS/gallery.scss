@@ -26,15 +26,18 @@
   position: relative;
   margin: 4px;
   border: 1px solid rgb(29, 23, 23);
+
+  &:hover {
+    transform: scale(1.01);
+    cursor: pointer;
+  }
+
+  &:hover .stats {
+    display: flex;
+    justify-content: space-evenly;
+  }
 }
-.result-container:hover {
-  transform: scale(1.01);
-  cursor: pointer;
-}
-.result-container:hover .stats {
-  display: flex;
-  justify-content: space-evenly;
-}
+
 .stats {
   position: absolute;
   bottom: 0;

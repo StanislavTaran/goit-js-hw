@@ -25,32 +25,32 @@ const queryOptions = {
     'https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=',
   API_KEY: '12685146-fdd2799488131e47273c0b199',
   numberOfPage: 1,
+  perPage: 30,
 };
 
-const fetchQuery = {
-  getImages(SearchQuery, numberOfPage) {
-    refs.spinner.classList.add('multi-spinner-visible');
-    refs.lastPageinfo.classList.remove('last-page-info--visible');
-    const query = `${SearchQuery}`;
-    return fetch(
-      queryOptions.proxyUrl +
-        queryOptions.baseUrl +
-        query +
-        '&' +
-        'page=' +
-        numberOfPage +
-        '&per_page=30' +
-        '&key=' +
-        queryOptions.API_KEY,
-    ).then(response => {
-      if (response.status) {
-        refs.spinner.classList.remove('multi-spinner-visible');
-      }
-      if (response.status == 200) {
-        return response.json();
-      }
-    });
-  },
+const getImages = (SearchQuery, numberOfPage) => {
+  refs.spinner.classList.add('multi-spinner-visible');
+  refs.lastPageinfo.classList.remove('last-page-info--visible');
+  const query = `${SearchQuery}`;
+  return fetch(
+    queryOptions.proxyUrl +
+      queryOptions.baseUrl +
+      query +
+      '&' +
+      'page=' +
+      numberOfPage +
+      '&per_page=' +
+      queryOptions.perPage +
+      '&key=' +
+      queryOptions.API_KEY,
+  ).then(response => {
+    if (response.status) {
+      refs.spinner.classList.remove('multi-spinner-visible');
+    }
+    if (response.status == 200) {
+      return response.json();
+    }
+  });
 };
 
 function handleSearchQuery(e) {
@@ -58,8 +58,12 @@ function handleSearchQuery(e) {
   const query = refs.input.value;
   if (query !== queryOptions.searchValue) {
     refs.galleryParent.innerHTML = '';
-    fetchQuery.getImages(query, queryOptions.numberOfPage).then(data => {
-      if (data.hits.length < 1) {
+    getImages(query, queryOptions.numberOfPage).then(data => {
+      const numberOfImages = data.hits.length;
+      if (numberOfImages < queryOptions.perPage) {
+        refs.lastPageinfo.classList.add('last-page-info--visible');
+      }
+      if (numberOfImages < 1) {
         PNotify.alert({
           text: 'Ничего не найдено по Вашему запросу.',
           delay: 1000,
