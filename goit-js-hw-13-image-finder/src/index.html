@@ -12,17 +12,36 @@
   </head>
 
   <body>
+    <div class="spinner-modal">
+      <div class="multi-spinner-container">
+        <div class="multi-spinner multi-spinner-1">
+          <div class="multi-spinner multi-spinner-2">
+            <div class="multi-spinner multi-spinner-3">
+              <div class="multi-spinner multi-spinner-4">
+                <div class="multi-spinner multi-spinner-5">
+                  <div class="multi-spinner"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="intro">
       <form class="search-form" id="search-form">
-        <input
-          class="search-input"
-          id="input"
-          type="text"
-          name="query"
-          autocomplete="off"
-          placeholder="Search images... For example: cow"
-        />
-        <button class="search-btn" id="search-btn">Search</button>
+        <h1 class="logo--txt">Search IT!</h1>
+        <div class="form-container">
+          <i class="material-icons icon--search">search</i>
+          <input
+            class="search-input"
+            id="input"
+            type="text"
+            name="query"
+            autocomplete="off"
+            placeholder="Search IT! For example: flower"
+          />
+          <button class="search-btn" id="search-btn">Search</button>
+        </div>
       </form>
     </div>
     <section id="result-of-search">
@@ -43,5 +62,10 @@
         ></button>
       </div>
     </section>
+    <footer class="footer">
+      <button id="to-top-btn" class="to-top-btn">
+        <i class="material-icons">arrow_upward</i>
+      </button>
+    </footer>
   </body>
 </html>

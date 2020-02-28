@@ -13,6 +13,8 @@ const refs = {
   lightbox: document.querySelector('.lightbox'),
   lightboxImage: document.querySelector('.lightbox__image'),
   lightboxOverlay: document.querySelector('.lightbox__content'),
+  toTopButton: document.getElementById('to-top-btn'),
+  spinner: document.querySelector('.spinner-modal'),
 };
 
 const queryOptions = {
@@ -26,6 +28,7 @@ const queryOptions = {
 
 const fetchQuery = {
   getImages(SearchQuery, numberOfPage) {
+    refs.spinner.classList.add('multi-spinner-visible');
     const query = `${SearchQuery}`;
     return fetch(
       queryOptions.proxyUrl +
@@ -38,6 +41,9 @@ const fetchQuery = {
         '&key=' +
         queryOptions.API_KEY,
     ).then(response => {
+      if (response.status) {
+        refs.spinner.classList.remove('multi-spinner-visible');
+      }
       if (response.status == 200) {
         return response.json();
       }
@@ -64,6 +70,7 @@ function handleSearchQuery(e) {
       delay: 1000,
     });
   }
+
   queryOptions.searchValue = query;
 }
 
@@ -141,8 +148,34 @@ infScr.on(`load`, response => {
   const images = JSON.parse(response);
 
   createMarkupResult(images);
+  refs.spinner.classList.remove('multi-spinner-visible');
 });
 
+infScr.on(`request`, () => {
+  refs.spinner.classList.add('multi-spinner-visible');
+});
+
+function checkHeight() {
+  if (window.pageYOffset < document.documentElement.clientHeight) {
+    refs.toTopButton.classList.remove(`btn-up-visible`);
+  } else {
+    refs.toTopButton.classList.add(`btn-up-visible`);
+  }
+}
+
+function goToTop() {
+  window.scrollTo({
+    top: 100,
+    left: 100,
+    behavior: 'smooth',
+  });
+}
+
+window.addEventListener('scroll', checkHeight);
+refs.toTopButton.addEventListener('click', goToTop);
 refs.searchButton.addEventListener('click', handleSearchQuery);
 refs.galleryParent.addEventListener('click', lightBox.openLightbox);
 refs.lightboxOverlay.addEventListener('click', lightBox.handleOverlayClick);
+refs.spinner.addEventListener('click', () => {
+  refs.spinner.classList.remove('multi-spinner-visible');
+});
