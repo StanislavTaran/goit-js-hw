@@ -1,4 +1,4 @@
-import './styles.css';
+import './SCSS/styles.scss';
 import TempalateResultItem from './templates/result-item.hbs';
 import PNotify from '../node_modules/pnotify/dist/es/PNotify';
 import '../node_modules/pnotify/dist/PNotifyBrightTheme.css';

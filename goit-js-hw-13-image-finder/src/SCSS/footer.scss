@@ -1,0 +1,24 @@
+.footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+.to-top-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 0;
+  background-color: rgb(238, 238, 228);
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+}
+.to-top-btn:hover {
+  cursor: pointer;
+  background-color: rgb(160, 160, 158);
+}
+
+.btn-up-visible {
+  display: inline-block;
+}
