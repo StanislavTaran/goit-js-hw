@@ -15,6 +15,7 @@ const refs = {
   lightboxOverlay: document.querySelector('.lightbox__content'),
   toTopButton: document.getElementById('to-top-btn'),
   spinner: document.querySelector('.spinner-modal'),
+  lastPageinfo: document.querySelector('.last-page-info'),
 };
 
 const queryOptions = {
@@ -29,6 +30,7 @@ const queryOptions = {
 const fetchQuery = {
   getImages(SearchQuery, numberOfPage) {
     refs.spinner.classList.add('multi-spinner-visible');
+    refs.lastPageinfo.classList.remove('last-page-info--visible');
     const query = `${SearchQuery}`;
     return fetch(
       queryOptions.proxyUrl +
@@ -37,7 +39,7 @@ const fetchQuery = {
         '&' +
         'page=' +
         numberOfPage +
-        '&per_page=12' +
+        '&per_page=30' +
         '&key=' +
         queryOptions.API_KEY,
     ).then(response => {
@@ -130,7 +132,7 @@ const infScr = new InfiniteScroll(refs.galleryParent, {
     return (
       queryOptions.proxyUrl +
       queryOptions.baseUrl +
-      '&per_page=12' +
+      '&per_page=18' +
       '&key=' +
       queryOptions.API_KEY +
       '&q=' +
@@ -146,14 +148,19 @@ const infScr = new InfiniteScroll(refs.galleryParent, {
 
 infScr.on(`load`, response => {
   const images = JSON.parse(response);
-
+  const isVisible = refs.lastPageinfo.classList.contains(
+    'last-page-info--visible',
+  );
+  if (images.hits.length < 1 && !isVisible) {
+    refs.lastPageinfo.classList.add('last-page-info--visible');
+  }
   createMarkupResult(images);
-  refs.spinner.classList.remove('multi-spinner-visible');
+  // refs.spinner.classList.remove('multi-spinner-visible');
 });
 
-infScr.on(`request`, () => {
-  refs.spinner.classList.add('multi-spinner-visible');
-});
+// infScr.on(`request`, () => {
+//   refs.spinner.classList.add('multi-spinner-visible');
+// }); //включение загрузочного экрана на подгрузке infinite
 
 function checkHeight() {
   if (window.pageYOffset < document.documentElement.clientHeight) {
