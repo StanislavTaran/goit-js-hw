@@ -60,7 +60,7 @@ function handleSearchQuery(e) {
     refs.galleryParent.innerHTML = '';
     getImages(query, queryOptions.numberOfPage).then(data => {
       const numberOfImages = data.hits.length;
-      if (numberOfImages < queryOptions.perPage) {
+      if (numberOfImages < queryOptions.perPage && numberOfImages !== 0) {
         refs.lastPageinfo.classList.add('last-page-info--visible');
       }
       if (numberOfImages < 1) {
@@ -190,3 +190,5 @@ refs.lightboxOverlay.addEventListener('click', lightBox.handleOverlayClick);
 refs.spinner.addEventListener('click', () => {
   refs.spinner.classList.remove('multi-spinner-visible');
 });
+
+module.exports = getImages;
